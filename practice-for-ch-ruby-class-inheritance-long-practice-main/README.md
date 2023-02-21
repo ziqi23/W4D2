@@ -1,3 +1,4 @@
+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
 # Class Inheritance
 
 This mini-project will apply the skills you learned in last night's inheritance
