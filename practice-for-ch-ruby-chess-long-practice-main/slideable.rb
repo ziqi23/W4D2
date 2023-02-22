@@ -63,9 +63,9 @@ module Slideable
     # the given direction is represented by two args, the combination of a dx and dy
     def grow_unblocked_moves_in_dir(dx, dy) #1,1
       # create an array to collect moves
-  
+      moves = []
       # get the piece's current row and current column #2,2
-  
+      x_pos, y_pos = self.pos
       # in a loop:
         # continually increment the piece's current row and current column to generate a new position #4,4
         # stop looping if the new position is invalid (not on the board); the piece can't move in this direction
@@ -73,8 +73,25 @@ module Slideable
         # if the new position is occupied with a piece of the opposite color, the piece can move here (to capture the opposing piece), so add the new position to the moves array
           # but, the piece cannot continue to move past this piece, so stop looping
         # if the new position is occupied with a piece of the same color, stop looping
-  
+      new_pos = [x_pos + dx, y_pos + dy]
+      while true
+        if !self.board.valid_pos?(new_pos)
+          break
+        end
+        if self.board[new_pos] == NullPiece.instance 
+          moves << new_pos
+        end
+        if self.board[new_pos] != NullPiece.instance && self.board[new_pos].color != self.color
+          moves << new_pos
+          break
+        end
+        if self.board[new_pos].color == self.color
+          break
+        end
+        new_pos = [new_pos[0] + dx, new_pos[1] + dy]
+      end
       # return the final moves array
+      moves
     end
   end
   
