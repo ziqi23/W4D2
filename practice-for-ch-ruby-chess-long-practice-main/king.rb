@@ -9,6 +9,13 @@ class King < Piece
     end
 
     def move_diffs
-
+        offset_arr = [[1, 0],
+                      [0, 1],
+                      [-1, 0],
+                      [0, -1],
+                      [1, 1],
+                      [-1, 1],
+                      [1, -1],
+                      [-1, -1]]
     end
 end
