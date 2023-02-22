@@ -5,6 +5,5 @@ class NullPiece < Piece
     include Singleton
 
     def initialize
-        return nil
     end
 end

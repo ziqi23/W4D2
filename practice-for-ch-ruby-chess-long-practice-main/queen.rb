@@ -1,7 +1,7 @@
 require_relative "piece"
 require_relative "slideable"
 
-class RookBishopQueen < Piece
+class Queen < Piece
     include Slideable
 
     attr_accessor :pos

@@ -1,6 +1,9 @@
 require_relative "piece"
-require_relative "rook_bishop_queen"
-require_relative "knight_king"
+require_relative "rook"
+require_relative "bishop"
+require_relative "queen"
+require_relative "knight"
+require_relative "king"
 require_relative "pawn"
 require_relative "null_piece"
 
@@ -8,14 +11,13 @@ require_relative "null_piece"
 class Board
     def initialize
         @rows = Array.new(8) { Array.new(8) }
-        # @null_piece = NullPiece.new      ## May need to replace nil with NullPiece
         (0..7).each do |row_idx|
             (0..7).each do |col_idx|
                 coord = [row_idx, col_idx]
                 if row_idx == 1 || row_idx == 6
                     @rows[row_idx][col_idx] = add_piece(:pawn, coord)
                 elsif row_idx.between?(2, 5)
-                    @rows[row_idx][col_idx] = nil
+                    @rows[row_idx][col_idx] = NullPiece.instance
                 elsif col_idx == 0 || col_idx == 7
                     @rows[row_idx][col_idx] = add_piece(:rook, coord)
                 elsif col_idx == 1 || col_idx == 6
@@ -38,12 +40,19 @@ class Board
         else
             color = :white
         end
-        if piece_sym == :pawn
+        case piece_sym
+        when :pawn
             Pawn.new(color, self, pos)
-        elsif piece_sym == :rook || piece_sym == :bishop || piece_sym == :queen
-            RookBishopQueen.new(color, self, pos)  ## Need to preserve piece symbol for the future
-        elsif piece_sym == :knight || piece_sym == :king
-            KnightKing.new(color, self, pos)
+        when :rook 
+            Rook.new(color, self, pos)
+        when :bishop 
+            Bishop.new(color, self, pos)
+        when :queen
+            Queen.new(color, self, pos)
+        when :knight
+            Knight.new(color, self, pos)
+        when :king
+            King.new(color, self, pos)
         end
     end
 
@@ -63,29 +72,25 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        our_piece = self[start_pos]
-        p our_piece.pos
-        p end_pos
-        raise "this is not a legal move" if our_piece.nil?
         if valid_pos?(start_pos) && valid_pos?(end_pos)
+            our_piece = self[start_pos]
+            if our_piece.is_a?(NullPiece)
+                raise "this is not a legal move - no piece at start position" 
+            end
             our_piece.pos = end_pos
             self[end_pos] = our_piece
-            self[start_pos] = nil
+            self[start_pos] = NullPiece.instance
             return true
         else
-            raise "Illegal position"
+            raise "Illegal position - start or end pos is not on the board"
         end
-        # other_piece = self[end_pos]
 
         # #color check
-        # if !other_piece.nil? && our_piece.color == other_piece.color
+        # if !other_piece.nil? && our_piece.color == other_piece.color``
         #     raise "Not a legal move"
         # end
 
         # can this piece type legally move like this? based on piece type
-        
-
-
     end
 
 end
