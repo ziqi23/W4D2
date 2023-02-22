@@ -7,4 +7,8 @@ class King < Piece
     def initialize(color, board, pos)
         super
     end
+
+    def move_diffs
+
+    end
 end

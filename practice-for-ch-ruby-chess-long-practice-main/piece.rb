@@ -16,4 +16,7 @@ class Piece
         # @pos[1] = new_pos[1]
     end
     
+    def moves 
+        raise NotImplementedError
+    end
 end

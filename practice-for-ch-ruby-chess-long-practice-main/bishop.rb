@@ -9,4 +9,8 @@ class Bishop < Piece
     def initialize(color, board, pos)
         super
     end
+
+    def move_dirs
+        diagonal_dirs
+    end
 end
