@@ -95,7 +95,7 @@ class Board
 
 end
 
-b = Board.new
-puts
-puts
-b.move_piece([0,0], [2,0])
+# b = Board.new
+# b.move_piece([6, 1], [2, 1])
+# b.move_piece([7, 0], [3, 1])
+# p b[[6, 1]].moves

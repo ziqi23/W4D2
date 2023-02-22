@@ -7,7 +7,7 @@ class Pawn < Piece
     end
 
     def moves
-
+        forward_steps + side_attacks
     end
 
     private
@@ -27,7 +27,18 @@ class Pawn < Piece
     end
 
     def forward_steps
+        valid_moves = []
+        x_pos, y_pos = self.pos
+        pos_1 = [x_pos + self.forward_dir, y_pos]
+        pos_2 = [x_pos + self.forward_dir * 2, y_pos]
         
+        if self.board[pos_1].is_a?(NullPiece)
+            valid_moves << pos_1
+            if self.at_start_row? && self.board[pos_2].is_a?(NullPiece)
+                valid_moves << pos_2
+            end
+        end
+        valid_moves
     end
 
     def side_attacks
