@@ -77,10 +77,14 @@ class Board
             if our_piece.is_a?(NullPiece)
                 raise "this is not a legal move - no piece at start position" 
             end
-            our_piece.pos = end_pos
-            self[end_pos] = our_piece
-            self[start_pos] = NullPiece.instance
-            return true
+            if our_piece.moves.include?(end_pos)
+                our_piece.pos = end_pos
+                self[end_pos] = our_piece
+                self[start_pos] = NullPiece.instance
+                return true
+            else
+                raise "Cannot place this piece there :("
+            end
         else
             raise "Illegal position - start or end pos is not on the board"
         end
