@@ -114,6 +114,10 @@ class Board
         king_pos = king.pos
         danger_zone.include?(king_pos)
     end
+
+    def checkmate?(color)
+        in_check?(color) && valid_moves.empty?
+    end
 end
 
 #b = Board.new
