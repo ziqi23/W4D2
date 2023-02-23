@@ -2,8 +2,10 @@ require_relative "piece"
 
 class Pawn < Piece
 
+ attr_reader :symbol
     def initialize(color, board, pos)
         super
+        @symbol = (color == :black ? "♟" : "♙")
     end
 
     def moves

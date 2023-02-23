@@ -21,6 +21,7 @@ class Piece
     end
 
     def to_s
-        self.class.to_s
+        self.symbol
     end
+   
 end

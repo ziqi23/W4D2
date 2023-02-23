@@ -4,8 +4,10 @@ require_relative "stepable"
 class Knight < Piece
     include Stepable
 
+  attr_reader :symbol
     def initialize(color, board, pos)
         super
+        @symbol = (color == :black ? "♞" : "♘")
     end
 
     def move_diffs

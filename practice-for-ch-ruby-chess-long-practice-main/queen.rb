@@ -6,8 +6,10 @@ class Queen < Piece
 
     attr_accessor :pos
 
+ attr_reader :symbol
     def initialize(color, board, pos)
         super
+        @symbol = (color == :black ? "♛" : "♕")
     end
 
     def move_dirs

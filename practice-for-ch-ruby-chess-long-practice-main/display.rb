@@ -9,16 +9,19 @@ class Display
     end
 
     def render
-        @cursor.cursor_pos
         @board.rows.each do |row|
             row_to_print = ""
             row.each do |piece|
                 #helper method here - what color to paint
-                row_to_print += piece.to_s.colorize(:green).ljust(20)
+                if piece.pos == @cursor.cursor_pos
+                    print piece.to_s.ljust(3).colorize(:red)
+                else
+                print piece.to_s.ljust(3)
+                end
+                # row_to_print += piece.to_s.colorize(:green).ljust(20)
             end
-            puts row_to_print
+            puts
         end
-        @board[@cursor.cursor_pos].to_s.colorize(:green)
     end
 end
 
