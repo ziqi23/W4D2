@@ -19,4 +19,8 @@ class Piece
     def moves 
         raise NotImplementedError
     end
+
+    def to_s
+        self.class.to_s
+    end
 end

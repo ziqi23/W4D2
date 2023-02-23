@@ -83,6 +83,7 @@ class Cursor
       update_pos(key)
     when :ctrl_c
       Process.exit(0)
+    end
   end
 
   def update_pos(diff)
