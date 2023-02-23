@@ -78,14 +78,14 @@ class Board
             if our_piece.is_a?(NullPiece)
                 raise "this is not a legal move - no piece at start position" 
             end
-            if our_piece.moves.include?(end_pos)
+            #if our_piece.moves.include?(end_pos)
                 our_piece.pos = end_pos
                 self[end_pos] = our_piece
                 self[start_pos] = NullPiece.instance
                 return true
-            else
+            #else
                 raise "Cannot place this piece there :("
-            end
+            #end
         else
             raise "Illegal position - start or end pos is not on the board"
         end
@@ -98,9 +98,26 @@ class Board
         # can this piece type legally move like this? based on piece type
     end
 
+    def in_check?(color)
+        king = []
+        danger_zone = []
+        @rows.each do |row|
+            row.each do |ele|
+                if ele.is_a?(King) && ele.color == color
+                    king = ele
+                end
+                if ele.color != color && !ele.is_a?(NullPiece)
+                    danger_zone += ele.moves
+                end
+            end
+        end
+        king_pos = king.pos
+        danger_zone.include?(king_pos)
+    end
 end
 
-# b = Board.new
-# b.move_piece([6, 1], [2, 1])
-# b.move_piece([7, 0], [3, 1])
-# p b[[6, 1]].moves
+#b = Board.new
+#b.move_piece([7, 3], [4, 4])
+#b.move_piece([0, 0], [7, 3])
+#p b.in_check?(:white)
+

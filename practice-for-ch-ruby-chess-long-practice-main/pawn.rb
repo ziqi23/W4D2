@@ -47,10 +47,10 @@ class Pawn < Piece
         valid_moves = []
         pos_1 = [self.pos[0] + self.forward_dir, self.pos[1] + 1]
         pos_2 = [self.pos[0] + self.forward_dir, self.pos[1] - 1]
-        if self.color != self.board[pos_1].color && !self.board[pos_1].is_a?(NullPiece)
+        if board.valid_pos?(pos_1) && self.color != self.board[pos_1].color && !self.board[pos_1].is_a?(NullPiece)
             valid_moves << pos_1
         end
-        if self.color != self.board[pos_2].color && !self.board[pos_2].is_a?(NullPiece)
+        if board.valid_pos?(pos_2) && self.color != self.board[pos_2].color && !self.board[pos_2].is_a?(NullPiece)
             valid_moves << pos_2
         end
         valid_moves
